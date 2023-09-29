@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+    <head th:replace="fragments/fragmento2 :: cabecera('Tecnicos')">
+    <body>
+        <div class="container">
+            <div class="row mb-4">
+                <div class="col-md-6 offset-md-3">
+                    <h2 th:text="${technician.id == 0? 'Nuevo Tecnico':'Editar Tecnico'}">Editar Tecnico</h2>
+                    <hr/>
+                    <div class="alert alert-danger" role="alert" th:if="${msg != null}" th:text="${msg}">
+                        A simple success alert—check it out!
+                    </div>
+                    <form method="post" th:action="@{'/save'}" th:object="${technician}">
+                        <input th:field="*{id}" type="hidden"/>
+                        <div class="mb-3">
+                            <label class="form-label">Nombre del Tecnico</label>
+                            <input th:field="*{firstName}" type="text" class="form-control"
+                                   th:classappend="${#fields.hasErrors('firstName')?'is-invalid':''}"/>
+                            <div id="validationServer03Feedback" class="invalid-feedback"
+                                 th:if="${#fields.hasErrors('firstName')}" th:errors="*{firstName}">
+                                Mensaje de error de productName
+                            </div>
+                        </div>
+                        <div class="mb-3">
+                            <label class="form-label">Apellido</label>
+                            <input th:field="*{lastName}" type="text" th:class="${#fields.hasErrors('lastName')?'form-control is-invalid':'form-control'}"/>
+                            <div class="invalid-feedback"
+                                 th:if="${#fields.hasErrors('lastName')}" th:errors="*{lastName}">
+                                Mensaje de error de productName
+                            </div>
+                        </div>
+                        <div class="mb-3">
+                            <label class="form-label">DNI</label>
+                            <input th:field="*{dni}" type="number" th:class="${#fields.hasErrors('dni')?'form-control is-invalid':'form-control'}"/>
+                            <div class="invalid-feedback"
+                                 th:if="${#fields.hasErrors('dni')}" th:errors="*{dni}">
+                                Mensaje de error de productName
+                            </div>
+                        </div>
+                        <div class="mb-3">
+                            <label class="form-label">Telefono</label>
+                            <input th:field="*{phone}" type="number" th:class="${#fields.hasErrors('phone')?'form-control is-invalid':'form-control'}"/>
+                            <div class="invalid-feedback"
+                                 th:if="${#fields.hasErrors('phone')}" th:errors="*{phone}">
+                                Mensaje de error de productName
+                            </div>
+                        </div>
+                        <div class="mb-3">
+                            <label class="form-label">Edad</label>
+                            <input th:field="*{age}" type="number" th:class="${#fields.hasErrors('age')?'form-control is-invalid':'form-control'}"/>
+                            <div class="invalid-feedback"
+                                 th:if="${#fields.hasErrors('age')}" th:errors="*{age}">
+                                Mensaje de error de productName
+                            </div>
+                        </div>
+                        <a th:href="@{'/tecnicos'}" class="btn btn-danger">Cancelar</a>
+                        <button type="submit" class="btn btn-primary"
+                                th:text="${technician.id==0? 'Guardar':'Actualizar'}">Actualizar
+                        </button>
+                    </form>
+                </div>
+            </div>
+        </div>
+        <script th:replace="~{fragments/navbar.html :: footer-bootstrap}"></script>
+    </body>
+</html>
